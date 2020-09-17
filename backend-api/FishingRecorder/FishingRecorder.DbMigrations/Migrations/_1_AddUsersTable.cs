@@ -2,6 +2,7 @@
 
 namespace FishingRecorder.DbMigrations.Migrations
 {
+    [Migration(1)]
     public class _1_AddUsersTable: AutoReversingMigration
     {
         public override void Up()
