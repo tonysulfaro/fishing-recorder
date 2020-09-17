@@ -4,4 +4,9 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="FluentMigrator" Version="3.2.9" />
+      <PackageReference Include="FluentMigrator.Runner.Postgres" Version="3.2.9" />
+    </ItemGroup>
+
 </Project>
