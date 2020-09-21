@@ -15,6 +15,7 @@ namespace FishingRecorder.API.Models.Response
             FishTypeId = r.FishTypeId;
             Lat = r.Lat;
             Lon = r.Lon;
+            Date = r.Date;
             FishType = new FishTypeResponse(r.FishType);
         }
         public int FishRecordId { get; set; }
@@ -22,6 +23,7 @@ namespace FishingRecorder.API.Models.Response
         public int FishTypeId { get; set; }
         public double Lat { get; set; }
         public double Lon { get; set; }
+        public DateTime? Date { get; set; }
         public FishTypeResponse FishType { get; set; }
     }
 }
