@@ -7,12 +7,9 @@ namespace FishingRecorder.DbMigrations.Migrations
     {
         public override void Up()
         {
-            Create.Table("Users")
+            Create.Table("User")
                 .WithColumn("UserID").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Email").AsString()
-                .WithColumn("Hash").AsString()
-                .WithColumn("Salt").AsString()
-                .WithColumn("RefreshToken").AsString();
+                .WithColumn("Auth0ID").AsString();
         }
     }
 }

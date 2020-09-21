@@ -1,38 +1,26 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using FishingRecorder.API.Interfaces;
-using FishingRecorder.API.Models.Request;
-using FishingRecorder.API.Models.Response;
+using FishingRecorder.API.Models.Database;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FishingRecorder.API.Controllers
 {
-    public class UsersController:ControllerBase
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
-        
-        public UsersController(IUserService userService)
+        private readonly IUserRepository _userRepository;
+
+        public UsersController(IUserRepository userRepository)
         {
-            _userService = userService;
+            _userRepository = userRepository;
         }
 
-        [HttpPost("signup")]
-        public async Task<ActionResult<AuthResponse>> Signup(SignupRequest request)
+        [HttpGet]
+        public async Task<ActionResult<List<User>>> GetAllUsers()
         {
-            var result = await _userService.Signup(request);
-
-            if (result == null)
-                return BadRequest("Signup Failed.");
-            return Ok(result);
-        }
-        
-        [HttpPost("login")]
-        public async Task<ActionResult<AuthResponse>> Login(LoginRequest request)
-        {
-            var result = await _userService.Login(request);
-
-            if (result == null)
-                return BadRequest("Login Failed.");
-            return Ok(result);
+            return await _userRepository.GetAllUsers();
         }
     }
 }

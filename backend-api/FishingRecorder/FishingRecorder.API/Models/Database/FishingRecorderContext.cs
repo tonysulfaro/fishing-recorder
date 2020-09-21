@@ -15,7 +15,7 @@ namespace FishingRecorder.API.Models.Database
         {
         }
 
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<User> User { get; set; }
         public virtual DbSet<VersionInfo> VersionInfo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -29,19 +29,13 @@ namespace FishingRecorder.API.Models.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Users>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(e => e.UserId);
-
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                entity.Property(e => e.Email).IsRequired();
-
-                entity.Property(e => e.Hash).IsRequired();
-
-                entity.Property(e => e.RefreshToken).IsRequired();
-
-                entity.Property(e => e.Salt).IsRequired();
+                entity.Property(e => e.Auth0Id)
+                    .IsRequired()
+                    .HasColumnName("Auth0ID");
             });
 
             modelBuilder.Entity<VersionInfo>(entity =>
