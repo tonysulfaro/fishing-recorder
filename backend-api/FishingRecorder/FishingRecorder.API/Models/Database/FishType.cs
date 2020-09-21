@@ -1,18 +1,20 @@
-﻿using System;
+﻿using System.Text.Json.Serialization;
+using System;
 using System.Collections.Generic;
 
 namespace FishingRecorder.API.Models.Database
 {
-    public partial class User
+    public partial class FishType
     {
-        public User()
+        public FishType()
         {
             FishRecord = new HashSet<FishRecord>();
         }
 
-        public int UserId { get; set; }
-        public string Auth0Id { get; set; }
+        public int FishTypeId { get; set; }
+        public string Type { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<FishRecord> FishRecord { get; set; }
     }
 }

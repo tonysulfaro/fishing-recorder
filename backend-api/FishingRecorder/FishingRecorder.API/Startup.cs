@@ -71,6 +71,7 @@ namespace FishingRecorder.API
 
             // configure DI for repositories
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IFishRepository, FishRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
