@@ -6,17 +6,18 @@ import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
-  <Auth0Provider
-    domain="rallyokr.us.auth0.com"
-    clientId="zn6yMlb3nZZ5SWhfNvX9XBLyGdR3kUnX"
-    redirectUri={window.location.origin}
-    audience="https://rallyokr.us.auth0.com/api/v2/"
-    scope="read:current_user update:current_user_metadata"
-  >
-    <React.StrictMode>
+  <React.StrictMode>
+    <Auth0Provider
+      domain="rallyokr.us.auth0.com"
+      clientId="zn6yMlb3nZZ5SWhfNvX9XBLyGdR3kUnX"
+      redirectUri={window.location.origin}
+      audience="https://rallyokr.us.auth0.com/api/v2/"
+      scope="read:current_user update:current_user_metadata"
+    >
       <App />
-    </React.StrictMode>
-  </Auth0Provider>,
+    </Auth0Provider>
+  </React.StrictMode>,
+
   document.getElementById("root")
 );
 

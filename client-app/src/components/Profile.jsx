@@ -32,7 +32,7 @@ const Profile = () => {
     };
 
     getUserMetadata();
-  }, []);
+  }, [getAccessTokenSilently, user]);
 
   return (
     isAuthenticated && (
