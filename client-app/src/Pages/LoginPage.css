@@ -1,0 +1,29 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.39),
+      rgba(0, 0, 0, 0.445)
+    ),
+    url("../Images/fishing.jpg");
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.login-container {
+  height: 100vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+}
+
+.login-items {
+  text-align: center;
+}

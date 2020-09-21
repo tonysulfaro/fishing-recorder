@@ -1,5 +1,6 @@
 import React from "react";
 import LogoutButton from "../components/LogoutButton";
+import MapView from "../components/MapView";
 import Profile from "../components/Profile";
 
 const Protected = () => {
@@ -8,7 +9,7 @@ const Protected = () => {
       <div>
         <h1>Protected</h1>
         <LogoutButton></LogoutButton>
-        <Profile></Profile>
+        {/* <MapView></MapView> */}
       </div>
     </div>
   );

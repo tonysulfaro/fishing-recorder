@@ -1,4 +1,5 @@
 import React from "react";
+import "./LoginPage.css";
 import LoginButton from "../components/LoginButton";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -22,9 +23,11 @@ const LoginPage = () => {
   }
 
   return (
-    <div>
-      <h1>Login To Fishing Recorder</h1>
-      <LoginButton></LoginButton>
+    <div className="login-container">
+      <div className="login-items">
+        <h1>Welcome To Fishing Recorder</h1>
+        <LoginButton></LoginButton>
+      </div>
     </div>
   );
 };
