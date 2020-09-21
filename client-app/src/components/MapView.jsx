@@ -8,7 +8,7 @@ const MapView = () => {
   const getInfoWindowString = (place) => `
     <div>
       <div style="font-size: 16px;">
-        ${place.name}
+        ${place.fishType.type}
       </div>
       <div style="font-size: 12px;">
         ${place.name}
@@ -19,12 +19,14 @@ const MapView = () => {
     const markers = [];
     const infowindows = [];
 
+    console.log(places);
+
     places.forEach((place) => {
       markers.push(
         new maps.Marker({
           position: {
-            lat: place.geometry.location.lat,
-            lng: place.geometry.location.lng,
+            lat: place.lat,
+            lng: place.lon,
           },
           map,
         })
@@ -45,14 +47,15 @@ const MapView = () => {
   };
 
   useEffect(() => {
-    fetch("places.json")
-      .then((response) => response.json())
-      .then((data) => {
-        data.results.forEach((result) => {
-          result.show = false; // eslint-disable-line no-param-reassign
-        });
-        setplaces(data.results);
-      });
+    async function getData() {
+      const resp = await fetch("https://localhost:44368/api/fishrecord");
+      const data = await resp.json();
+
+      console.log(data);
+
+      setplaces(data);
+    }
+    getData();
   }, []);
 
   return (

@@ -1,4 +1,5 @@
 ﻿using FishingRecorder.API.Models.Database;
+using FishingRecorder.API.Models.Request;
 using FishingRecorder.API.Models.Response;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,5 +12,7 @@ namespace FishingRecorder.API.Interfaces
     public interface IFishRepository
     {
         Task<ActionResult<List<FishTypeResponse>>> GetFishTypes();
+        Task<ActionResult<List<FishRecordResponse>>> GetAllRecords();
+        Task<ActionResult<int>> SaveFishRecord(FishRecordSaveRequest request);
     }
 }
