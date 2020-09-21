@@ -5,10 +5,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
-  useHistory,
-  useLocation,
 } from "react-router-dom";
 import Protected from "./Pages/Protected";
 import LoginPage from "./Pages/LoginPage";
