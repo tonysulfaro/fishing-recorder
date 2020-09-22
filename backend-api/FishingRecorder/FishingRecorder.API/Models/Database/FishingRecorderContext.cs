@@ -16,7 +16,6 @@ namespace FishingRecorder.API.Models.Database
         }
 
         public virtual DbSet<FishRecord> FishRecord { get; set; }
-        public virtual DbSet<FishType> FishType { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<VersionInfo> VersionInfo { get; set; }
 
@@ -35,28 +34,13 @@ namespace FishingRecorder.API.Models.Database
             {
                 entity.Property(e => e.FishRecordId).HasColumnName("FishRecordID");
 
-                entity.Property(e => e.FishTypeId).HasColumnName("FishTypeID");
-
                 entity.Property(e => e.UserId).HasColumnName("UserID");
-
-                entity.HasOne(d => d.FishType)
-                    .WithMany(p => p.FishRecord)
-                    .HasForeignKey(d => d.FishTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FishRecord_FishTypeID_FishType_FishTypeID");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.FishRecord)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_FishRecord_UserID_User_UserID");
-            });
-
-            modelBuilder.Entity<FishType>(entity =>
-            {
-                entity.Property(e => e.FishTypeId).HasColumnName("FishTypeID");
-
-                entity.Property(e => e.Type).IsRequired();
             });
 
             modelBuilder.Entity<User>(entity =>

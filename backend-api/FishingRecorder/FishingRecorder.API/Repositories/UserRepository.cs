@@ -1,5 +1,6 @@
 ﻿using FishingRecorder.API.Interfaces;
 using FishingRecorder.API.Models.Database;
+using FishingRecorder.API.Models.Response;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,7 +16,9 @@ namespace FishingRecorder.API.Repositories
         {
             await using FishingRecorderContext context = new FishingRecorderContext();
 
-            return await context.User.ToListAsync();
+            return await context.User
+                .Include(u => u.FishRecord)
+                .ToListAsync();
         }
     }
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./AddFishButton.css";
 import { Button, Modal, Form } from "react-bootstrap";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function getLocation() {
   if (navigator.geolocation) {
@@ -18,10 +19,19 @@ function showPosition(position) {
 function MyVerticallyCenteredModal(props) {
   const [fishTypeId, setfishTypeId] = useState(11);
   const [lengthInches, setlengthInches] = useState();
+  const { getAccessTokenSilently } = useAuth0();
 
   async function handleSubmit() {
+    const domain = "rallyokr.us.auth0.com";
+    const accessToken = await getAccessTokenSilently({
+      audience: `https://${domain}/api/v2/`,
+      scope: "read:current_user",
+    });
+
+    console.log(accessToken);
+
     var payload = {
-      userId: 1, //hardcoded for now
+      token: accessToken, //hardcoded for now
       FishTypeId: fishTypeId,
       lat: document.getElementById("lat").value,
       lon: document.getElementById("lon").value,

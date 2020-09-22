@@ -11,7 +11,6 @@ namespace FishingRecorder.API.Interfaces
 {
     public interface IFishRepository
     {
-        Task<ActionResult<List<FishTypeResponse>>> GetFishTypes();
         Task<ActionResult<List<FishRecordResponse>>> GetAllRecords();
         Task<ActionResult<int>> SaveFishRecord(FishRecordSaveRequest request);
     }

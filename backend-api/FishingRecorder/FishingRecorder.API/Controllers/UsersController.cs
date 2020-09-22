@@ -2,11 +2,13 @@
 using System.Threading.Tasks;
 using FishingRecorder.API.Interfaces;
 using FishingRecorder.API.Models.Database;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FishingRecorder.API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class UsersController : ControllerBase
     {

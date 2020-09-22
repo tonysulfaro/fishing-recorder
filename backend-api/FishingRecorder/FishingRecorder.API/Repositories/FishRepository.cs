@@ -23,15 +23,6 @@ namespace FishingRecorder.API.Repositories
                 .ToListAsync();
         }
 
-        public async Task<ActionResult<List<FishTypeResponse>>> GetFishTypes()
-        {
-            await using FishingRecorderContext context = new FishingRecorderContext();
-
-            return await context.FishType
-                .Select(f => new FishTypeResponse(f))
-                .ToListAsync();
-        }
-
         public async Task<ActionResult<int>> SaveFishRecord(FishRecordSaveRequest request)
         {
             await using FishingRecorderContext context = new FishingRecorderContext();
@@ -39,7 +30,7 @@ namespace FishingRecorder.API.Repositories
             var newRecord = new FishRecord()
             {
                 UserId = request.UserId,
-                FishTypeId = request.FishTypeId,
+                FishType = request.FishType,
                 Lat = request.Lat,
                 Lon = request.Lon,
                 LengthInches = request.LengthInches,
