@@ -63,10 +63,15 @@ function MyVerticallyCenteredModal(props) {
         <Form>
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>Fish Type</Form.Label>
-            <Form.Control as="select">
+            <Form.Control
+              as="select"
+              onChange={(e) => {
+                setfishTypeId(e.target.value);
+              }}
+            >
               {props.fishtypes.map((fishtype) => {
                 return (
-                  <option key={fishtype.FishTypeId} value={fishtype.FishTypeId}>
+                  <option key={fishtype.fishTypeId} value={fishtype.fishTypeId}>
                     {fishtype.type}
                   </option>
                 );
