@@ -41,7 +41,9 @@ namespace FishingRecorder.API.Repositories
                 UserId = request.UserId,
                 FishTypeId = request.FishTypeId,
                 Lat = request.Lat,
-                Lon = request.Lon
+                Lon = request.Lon,
+                LengthInches = request.LengthInches,
+                Date = DateTime.UtcNow
             };
 
             await context.FishRecord.AddAsync(newRecord);

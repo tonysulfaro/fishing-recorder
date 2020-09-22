@@ -11,5 +11,6 @@ namespace FishingRecorder.API.Models.Request
         public int FishTypeId { get; set; }
         public double Lat { get; set; }
         public double Lon { get; set; }
+        public int? LengthInches { get; set; }
     }
 }
