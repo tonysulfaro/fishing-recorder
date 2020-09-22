@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./AddFishButton.css";
 import { Button, Modal, Form } from "react-bootstrap";
 
@@ -16,6 +16,35 @@ function showPosition(position) {
 }
 
 function MyVerticallyCenteredModal(props) {
+  const [fishTypeId, setfishTypeId] = useState(11);
+  const [lengthInches, setlengthInches] = useState();
+
+  async function handleSubmit() {
+    var payload = {
+      userId: 1, //hardcoded for now
+      FishTypeId: fishTypeId,
+      lat: document.getElementById("lat").value,
+      lon: document.getElementById("lon").value,
+      lengthInches: lengthInches,
+    };
+
+    var resp = await fetch(
+      "https://fishingrecorderapi.azurewebsites.net/api/FishRecord/save",
+      {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
+
+    if (resp.status !== 200) {
+      alert("Fish Save Failed");
+    }
+  }
+
   return (
     <Modal
       {...props}
@@ -33,17 +62,25 @@ function MyVerticallyCenteredModal(props) {
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>Fish Type</Form.Label>
             <Form.Control as="select">
-              <option>Walleye</option>
-              <option>Perch</option>
-              <option>Drum</option>
-              <option>Goby</option>
-              <option>Catfish</option>
+              {props.fishtypes.map((fishtype) => {
+                return (
+                  <option key={fishtype.FishTypeId} value={fishtype.FishTypeId}>
+                    {fishtype.type}
+                  </option>
+                );
+              })}
             </Form.Control>
           </Form.Group>
 
           <Form.Group controlId="exampleForm.ControlInput1">
             <Form.Label>Fish Length</Form.Label>
-            <Form.Control type="number" placeholder="Fish Length" />
+            <Form.Control
+              type="number"
+              placeholder="Fish Length"
+              onChange={(e) => {
+                setlengthInches(e.target.value);
+              }}
+            />
           </Form.Group>
 
           <Form.Group controlId="exampleForm.ControlInput1">
@@ -61,7 +98,13 @@ function MyVerticallyCenteredModal(props) {
         <Button variant="danger" onClick={props.onHide}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={props.onHide}>
+        <Button
+          variant="primary"
+          onClick={() => {
+            handleSubmit();
+            props.onHide();
+          }}
+        >
           Save
         </Button>
       </Modal.Footer>
@@ -70,7 +113,22 @@ function MyVerticallyCenteredModal(props) {
 }
 
 const AddFishButton = () => {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [fishtypes, setfishtypes] = useState([]);
+
+  useEffect(() => {
+    async function getFishTypes() {
+      const resp = await fetch(
+        "https://fishingrecorderapi.azurewebsites.net/api/FishType"
+      );
+      const data = await resp.json();
+
+      console.log(data);
+      setfishtypes(data);
+    }
+
+    getFishTypes();
+  }, []);
 
   return (
     <>
@@ -85,6 +143,7 @@ const AddFishButton = () => {
         Add Fish
       </Button>
       <MyVerticallyCenteredModal
+        fishtypes={fishtypes}
         show={modalShow}
         onHide={() => setModalShow(false)}
       />

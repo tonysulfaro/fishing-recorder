@@ -51,18 +51,6 @@ const MapView = () => {
     });
   };
 
-  // useEffect(() => {
-  //   async function getData() {
-  //     const resp = await fetch("https://localhost:44368/api/fishrecord");
-  //     const data = await resp.json();
-
-  //     console.log(data);
-
-  //     setplaces(data);
-  //   }
-  //   getData();
-  // }, []);
-
   return (
     <div className="map-container">
       <GoogleMapReact
