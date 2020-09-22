@@ -11,17 +11,20 @@ const MapView = () => {
         ${place.fishType.type}
       </div>
       <div style="font-size: 12px;">
-        ${place.name}
+        ${place.date}
       </div>
     </div>`;
 
-  const handleApiLoaded = (map, maps, places) => {
+  const handleApiLoaded = async (map, maps, places) => {
     const markers = [];
     const infowindows = [];
 
+    const resp = await fetch("https://localhost:44368/api/fishrecord");
+    const data = await resp.json();
+
     console.log(places);
 
-    places.forEach((place) => {
+    data.forEach((place) => {
       markers.push(
         new maps.Marker({
           position: {
@@ -46,17 +49,17 @@ const MapView = () => {
     });
   };
 
-  useEffect(() => {
-    async function getData() {
-      const resp = await fetch("https://localhost:44368/api/fishrecord");
-      const data = await resp.json();
+  // useEffect(() => {
+  //   async function getData() {
+  //     const resp = await fetch("https://localhost:44368/api/fishrecord");
+  //     const data = await resp.json();
 
-      console.log(data);
+  //     console.log(data);
 
-      setplaces(data);
-    }
-    getData();
-  }, []);
+  //     setplaces(data);
+  //   }
+  //   getData();
+  // }, []);
 
   return (
     <div className="map-container">
