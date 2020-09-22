@@ -25,7 +25,7 @@ namespace FishingRecorder.API.Models.Database
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseNpgsql("User ID=postgres;Password=Perkynips23;Host=64.227.86.20;Port=5432;Database=FishingRecorder;");
+                optionsBuilder.UseNpgsql("User ID=sample_user;Password=test;Host=64.227.86.20;Port=5432;Database=FishingRecorder;");
             }
         }
 
