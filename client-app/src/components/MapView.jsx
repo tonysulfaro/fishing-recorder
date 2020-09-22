@@ -19,7 +19,9 @@ const MapView = () => {
     const markers = [];
     const infowindows = [];
 
-    const resp = await fetch("https://localhost:44368/api/fishrecord");
+    const resp = await fetch(
+      "https://fishingrecorderapi.azurewebsites.net/api/fishrecord"
+    );
     const data = await resp.json();
 
     console.log(places);
