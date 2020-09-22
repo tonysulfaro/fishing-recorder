@@ -11,6 +11,7 @@ namespace FishingRecorder.API.Models.Database
         public double Lat { get; set; }
         public double Lon { get; set; }
         public DateTime? Date { get; set; }
+        public int? LengthInches { get; set; }
 
         public virtual FishType FishType { get; set; }
         public virtual User User { get; set; }
