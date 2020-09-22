@@ -2,6 +2,7 @@ import React from "react";
 import "./Navigation.css";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import LogoutButton from "./LogoutButton";
+import AddFishButton from "./AddFishButton";
 
 const Navigation = (props) => {
   return (
@@ -20,6 +21,7 @@ const Navigation = (props) => {
           <Nav.Link href="#pricing">My Fish</Nav.Link>
         </Nav>
         <Nav>
+          <AddFishButton></AddFishButton>
           <LogoutButton></LogoutButton>
         </Nav>
       </Navbar.Collapse>

@@ -1,0 +1,10 @@
+.add-fish {
+  margin-right: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .add-fish {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
