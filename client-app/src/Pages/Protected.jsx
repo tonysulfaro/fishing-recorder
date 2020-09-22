@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Protected.css";
 import MapView from "../components/MapView";
 import Navigation from "../components/Navigation";

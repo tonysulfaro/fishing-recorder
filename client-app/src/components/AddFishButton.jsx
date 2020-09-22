@@ -28,6 +28,8 @@ function MyVerticallyCenteredModal(props) {
       lengthInches: lengthInches,
     };
 
+    console.log(payload);
+
     var resp = await fetch(
       "https://fishingrecorderapi.azurewebsites.net/api/FishRecord/save",
       {

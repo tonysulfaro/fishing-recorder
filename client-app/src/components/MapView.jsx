@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./MapView.css";
 import GoogleMapReact from "google-map-react";
 
@@ -12,6 +12,9 @@ const MapView = () => {
       </div>
       <div style="font-size: 12px;">
         ${place.date}
+      </div>
+      <div style="font-size: 12px;">
+        Length:${place.lengthInches}"
       </div>
     </div>`;
 

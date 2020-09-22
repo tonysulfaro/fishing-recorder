@@ -1,6 +1,6 @@
 import React from "react";
 import "./Navigation.css";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 import LogoutButton from "./LogoutButton";
 import AddFishButton from "./AddFishButton";
 
