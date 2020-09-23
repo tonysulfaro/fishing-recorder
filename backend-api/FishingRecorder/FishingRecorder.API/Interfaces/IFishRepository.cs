@@ -13,5 +13,6 @@ namespace FishingRecorder.API.Interfaces
     {
         Task<ActionResult<List<FishRecordResponse>>> GetAllRecords();
         Task<ActionResult<int>> SaveFishRecord(FishRecordSaveRequest request);
+        Task<ActionResult<List<FishRecordResponse>>> GetUserRecords(string token);
     }
 }

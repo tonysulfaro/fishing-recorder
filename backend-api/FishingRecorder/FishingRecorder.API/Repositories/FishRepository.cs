@@ -52,6 +52,18 @@ namespace FishingRecorder.API.Repositories
             return newRecord.FishRecordId;
         }
 
+        public async Task<ActionResult<List<FishRecordResponse>>> GetUserRecords(string token)
+        {
+            await using FishingRecorderContext context = new FishingRecorderContext();
+
+            var user = await GetUserFromToken(token);
+
+            return await context.FishRecord
+                .Where(u => u.UserId == user.UserId)
+                .Select(r => new FishRecordResponse(r))
+                .ToListAsync();
+        }
+
         // helper methods
         public async Task<User> GetUserFromToken(string requestToken)
         {
@@ -83,5 +95,7 @@ namespace FishingRecorder.API.Repositories
 
             return await GetUserFromToken(requestToken);
         }
+
+       
     }
 }

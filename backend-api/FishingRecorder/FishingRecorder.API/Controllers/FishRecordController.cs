@@ -28,6 +28,12 @@ namespace FishingRecorder.API.Controllers
             return await _fishRepository.GetAllRecords();
         }
 
+        [HttpGet("myfish")]
+        public async Task<ActionResult<List<FishRecordResponse>>> GetUserRecords(string token)
+        {
+            return await _fishRepository.GetUserRecords(token);
+        }
+
         [HttpPost("save")]
         public async Task<ActionResult<int>> SaveFishRecord(FishRecordSaveRequest request)
         {
