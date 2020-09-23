@@ -18,7 +18,6 @@ namespace FishingRecorder.API.Repositories
             await using FishingRecorderContext context = new FishingRecorderContext();
 
             return await context.FishRecord
-                .Include(r => r.FishType)
                 .Select(r => new FishRecordResponse(r))
                 .ToListAsync();
         }
