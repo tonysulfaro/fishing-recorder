@@ -8,7 +8,7 @@ const MapView = () => {
   const getInfoWindowString = (place) => `
     <div>
       <div style="font-size: 16px;">
-        ${place.fishType.type}
+        ${place.fishType}
       </div>
       <div style="font-size: 12px;">
         ${place.date}

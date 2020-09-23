@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace FishingRecorder.API.Repositories
@@ -26,9 +29,16 @@ namespace FishingRecorder.API.Repositories
         {
             await using FishingRecorderContext context = new FishingRecorderContext();
 
+            var user = await GetUserFromToken(request.Token);
+
+            if (user == null)
+            {
+                user = await SaveNewUserFromToken(request.Token);
+            }
+
             var newRecord = new FishRecord()
             {
-                UserId = request.UserId,
+                UserId = user.UserId,
                 FishType = request.FishType,
                 Lat = request.Lat,
                 Lon = request.Lon,
@@ -40,6 +50,38 @@ namespace FishingRecorder.API.Repositories
             await context.SaveChangesAsync();
 
             return newRecord.FishRecordId;
+        }
+
+        // helper methods
+        public async Task<User> GetUserFromToken(string requestToken)
+        {
+            await using FishingRecorderContext context = new FishingRecorderContext();
+
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadJwtToken(requestToken);
+            var subject = token.Subject;
+
+            var user = await context.User
+                .Where(u => u.Auth0Id == subject)
+                .FirstOrDefaultAsync();
+
+            return user;
+        }
+
+        public async Task<User> SaveNewUserFromToken(string requestToken)
+        {
+            await using FishingRecorderContext context = new FishingRecorderContext();
+
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadJwtToken(requestToken);
+            var subject = token.Subject;
+
+            var newUser = await context.User
+                .AddAsync(new User { Auth0Id = subject });
+
+            await context.SaveChangesAsync();
+
+            return await GetUserFromToken(requestToken);
         }
     }
 }

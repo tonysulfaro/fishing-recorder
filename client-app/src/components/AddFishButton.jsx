@@ -17,7 +17,7 @@ function showPosition(position) {
 }
 
 function MyVerticallyCenteredModal(props) {
-  const [fishTypeId, setfishTypeId] = useState(11);
+  const [fishType, setfishType] = useState("walleye");
   const [lengthInches, setlengthInches] = useState();
   const { getAccessTokenSilently } = useAuth0();
 
@@ -32,7 +32,7 @@ function MyVerticallyCenteredModal(props) {
 
     var payload = {
       token: accessToken, //hardcoded for now
-      FishTypeId: fishTypeId,
+      FishType: fishType,
       lat: document.getElementById("lat").value,
       lon: document.getElementById("lon").value,
       lengthInches: lengthInches,
@@ -47,7 +47,6 @@ function MyVerticallyCenteredModal(props) {
         body: JSON.stringify(payload),
         headers: {
           "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
     );
@@ -76,16 +75,20 @@ function MyVerticallyCenteredModal(props) {
             <Form.Control
               as="select"
               onChange={(e) => {
-                setfishTypeId(e.target.value);
+                setfishType(e.target.value);
               }}
             >
-              {props.fishtypes.map((fishtype) => {
-                return (
-                  <option key={fishtype.fishTypeId} value={fishtype.fishTypeId}>
-                    {fishtype.type}
-                  </option>
-                );
-              })}
+              <option value="walleye">Walleye</option>
+              <option value="perch">Perch</option>
+              <option value="large-mouth-bass">Large Mouth Bass</option>
+              <option value="small-mouth-bass">Small Mouth Bass</option>
+              <option value="rock-bass">Rock Bass</option>
+              <option value="drum">Drum</option>
+              <option value="catfish">Catfish</option>
+              <option value="muskie">Muskie</option>
+              <option value="pike">Pike</option>
+              <option value="steelhead">Steelhead</option>
+              <option value="king-salmon">King Salmon</option>
             </Form.Control>
           </Form.Group>
 
@@ -131,21 +134,12 @@ function MyVerticallyCenteredModal(props) {
 
 const AddFishButton = () => {
   const [modalShow, setModalShow] = useState(false);
-  const [fishtypes, setfishtypes] = useState([]);
 
-  useEffect(() => {
-    async function getFishTypes() {
-      const resp = await fetch(
-        "https://fishingrecorderapi.azurewebsites.net/api/FishType"
-      );
-      const data = await resp.json();
-
-      console.log(data);
-      setfishtypes(data);
-    }
-
-    getFishTypes();
-  }, []);
+  const fishtypes = [
+    {
+      Walleye: "walleye",
+    },
+  ];
 
   return (
     <>
