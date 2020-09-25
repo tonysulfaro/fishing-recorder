@@ -41,7 +41,7 @@ function MyVerticallyCenteredModal(props) {
     console.log(payload);
 
     var resp = await fetch(
-      "https://fishingrecorderapi.azurewebsites.net/api/FishRecord/save",
+      "https://fishing-recorder-api.herokuapp.com/api/FishRecord/save",
       {
         method: "POST",
         body: JSON.stringify(payload),

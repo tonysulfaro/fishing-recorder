@@ -23,7 +23,7 @@ const MapView = () => {
     const infowindows = [];
 
     const resp = await fetch(
-      "https://fishingrecorderapi.azurewebsites.net/api/fishrecord"
+      "https://fishing-recorder-api.herokuapp.com/api/fishrecord"
     );
     const data = await resp.json();
 
