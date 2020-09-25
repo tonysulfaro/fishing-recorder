@@ -2,7 +2,6 @@ import React from "react";
 import "./LoginPage.css";
 import LoginButton from "../components/LoginButton";
 import { useAuth0 } from "@auth0/auth0-react";
-
 import { Redirect, useLocation } from "react-router-dom";
 
 const LoginPage = () => {
@@ -24,9 +23,11 @@ const LoginPage = () => {
 
   return (
     <div className="login-container">
-      <div className="login-items">
-        <h1>Welcome To Fishing Recorder</h1>
-        <LoginButton></LoginButton>
+      <div className="bg">
+        <div className="login-items">
+          <h1>Welcome To Fishing Recorder</h1>
+          <LoginButton></LoginButton>
+        </div>
       </div>
     </div>
   );
