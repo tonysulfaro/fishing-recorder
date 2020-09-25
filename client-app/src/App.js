@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Protected from "./Pages/Protected";
 import LoginPage from "./Pages/LoginPage";
+import NotFound from "./Pages/NotFound";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -38,11 +39,14 @@ function App() {
   return (
     <Router>
       <Switch>
-        <PrivateRoute path="/protected">
+        <PrivateRoute exact path="/protected">
           <Protected></Protected>
         </PrivateRoute>
-        <Route path="/">
+        <Route exact path="/">
           <LoginPage></LoginPage>
+        </Route>
+        <Route>
+          <NotFound></NotFound>
         </Route>
       </Switch>
     </Router>
