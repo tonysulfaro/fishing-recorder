@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./MapView.css";
 import GoogleMapReact from "google-map-react";
 
@@ -22,14 +22,7 @@ const MapView = () => {
     const markers = [];
     const infowindows = [];
 
-    const resp = await fetch(
-      "https://fishing-recorder-api.herokuapp.com/api/fishrecord"
-    );
-    const data = await resp.json();
-
-    console.log(places);
-
-    data.forEach((place) => {
+    places.forEach((place) => {
       markers.push(
         new maps.Marker({
           position: {
@@ -54,20 +47,33 @@ const MapView = () => {
     });
   };
 
+  useEffect(() => {
+    function getFish() {
+      fetch("https://fishing-recorder-api.herokuapp.com/api/fishrecord")
+        .then((response) => response.json())
+        .then((data) => {
+          setplaces(data);
+        });
+    }
+    getFish();
+  }, []);
+
   return (
     <div className="map-container">
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyDpgAuVPLlA92VjKFmTudrYlS8dVpj-Yr4" }}
-        defaultCenter={{
-          lat: 43.763,
-          lng: -83.744,
-        }}
-        defaultZoom={7}
-        yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map, maps }) =>
-          handleApiLoaded(map, maps, places)
-        }
-      ></GoogleMapReact>
+      {places.length > 0 ? (
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyDpgAuVPLlA92VjKFmTudrYlS8dVpj-Yr4" }}
+          defaultCenter={{
+            lat: 43.763,
+            lng: -83.744,
+          }}
+          defaultZoom={7}
+          yesIWantToUseGoogleMapApiInternals
+          onGoogleApiLoaded={({ map, maps }) =>
+            handleApiLoaded(map, maps, places)
+          }
+        ></GoogleMapReact>
+      ) : null}
     </div>
   );
 };
