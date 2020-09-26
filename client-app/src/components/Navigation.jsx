@@ -52,7 +52,7 @@ const Navigation = (props) => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#features" onClick={getAllFish}>
+          <Nav.Link href="#allfish" onClick={getAllFish}>
             All Fish
           </Nav.Link>
           <Nav.Link href="#myfish" onClick={getMyFish}>

@@ -47,10 +47,10 @@ const MapView = (props) => {
   }, []);
 
   useEffect(() => {
-    if (map !== null) {
+    if (map !== null && maps !== null) {
       handleApiLoaded(map, maps, props.fish);
     }
-  }, [props.fish]);
+  }, [map, maps, props.fish, handleApiLoaded]);
 
   return (
     <div className="map-container">
