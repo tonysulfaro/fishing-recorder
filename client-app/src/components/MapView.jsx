@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./MapView.css";
 import GoogleMapReact from "google-map-react";
 import Marker from "../components/Marker";
 
 const MapView = (props) => {
+  const [map, setmap] = useState(null);
+  const [maps, setmaps] = useState(null);
+
   // Return map bounds based on list of places
   const getMapBounds = (map, maps, places) => {
     const bounds = new maps.LatLngBounds();
@@ -43,6 +46,12 @@ const MapView = (props) => {
     getFish();
   }, []);
 
+  useEffect(() => {
+    if (map !== null) {
+      handleApiLoaded(map, maps, props.fish);
+    }
+  }, [props.fish]);
+
   return (
     <div className="map-container">
       {props.fish.length > 0 ? (
@@ -54,9 +63,10 @@ const MapView = (props) => {
           }}
           defaultZoom={7}
           yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }) =>
-            handleApiLoaded(map, maps, props.fish)
-          }
+          onGoogleApiLoaded={({ map, maps }) => {
+            setmap(map);
+            setmaps(maps);
+          }}
         >
           {props.fish.map((fish) => (
             <Marker
