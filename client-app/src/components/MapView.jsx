@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./MapView.css";
 import GoogleMapReact from "google-map-react";
 
-const MapView = () => {
-  const [places, setplaces] = useState([]);
-
+const MapView = (props) => {
   const getInfoWindowString = (place) => `
     <div>
       <div style="font-size: 16px;">
@@ -52,7 +50,7 @@ const MapView = () => {
       fetch("https://fishing-recorder-api.herokuapp.com/api/fishrecord")
         .then((response) => response.json())
         .then((data) => {
-          setplaces(data);
+          props.setfish(data);
         });
     }
     getFish();
@@ -60,7 +58,7 @@ const MapView = () => {
 
   return (
     <div className="map-container">
-      {places.length > 0 ? (
+      {props.fish.length > 0 ? (
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyDpgAuVPLlA92VjKFmTudrYlS8dVpj-Yr4" }}
           defaultCenter={{
@@ -70,7 +68,7 @@ const MapView = () => {
           defaultZoom={7}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) =>
-            handleApiLoaded(map, maps, places)
+            handleApiLoaded(map, maps, props.fish)
           }
         ></GoogleMapReact>
       ) : null}

@@ -5,6 +5,8 @@ import LogoutButton from "./LogoutButton";
 import AddFishButton from "./AddFishButton";
 
 const Navigation = (props) => {
+  async function getMyFish() {}
+
   return (
     <Navbar
       className="nav"
@@ -18,7 +20,7 @@ const Navigation = (props) => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="#features">All Fish</Nav.Link>
-          <Nav.Link href="#pricing">My Fish</Nav.Link>
+          <Nav.Link onClick={getMyFish}>My Fish</Nav.Link>
         </Nav>
         <Nav>
           <AddFishButton></AddFishButton>
