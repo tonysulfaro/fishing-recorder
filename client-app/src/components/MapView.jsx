@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./MapView.css";
 import GoogleMapReact from "google-map-react";
+import Marker from "../components/Marker";
 
 const MapView = (props) => {
   const getInfoWindowString = (place) => `
@@ -43,32 +44,32 @@ const MapView = (props) => {
     // Bind the resize listener
     bindResizeListener(map, maps, bounds);
 
-    const markers = [];
-    const infowindows = [];
+    // const markers = [];
+    // const infowindows = [];
 
-    places.forEach((place) => {
-      markers.push(
-        new maps.Marker({
-          position: {
-            lat: place.lat,
-            lng: place.lon,
-          },
-          map,
-        })
-      );
+    // places.forEach((place) => {
+    //   markers.push(
+    //     new maps.Marker({
+    //       position: {
+    //         lat: place.lat,
+    //         lng: place.lon,
+    //       },
+    //       map,
+    //     })
+    //   );
 
-      infowindows.push(
-        new maps.InfoWindow({
-          content: getInfoWindowString(place),
-        })
-      );
-    });
+    //   infowindows.push(
+    //     new maps.InfoWindow({
+    //       content: getInfoWindowString(place),
+    //     })
+    //   );
+    // });
 
-    markers.forEach((marker, i) => {
-      marker.addListener("click", () => {
-        infowindows[i].open(map, marker);
-      });
-    });
+    // markers.forEach((marker, i) => {
+    //   marker.addListener("click", () => {
+    //     infowindows[i].open(map, marker);
+    //   });
+    // });
   };
 
   useEffect(() => {
@@ -96,7 +97,16 @@ const MapView = (props) => {
           onGoogleApiLoaded={({ map, maps }) =>
             handleApiLoaded(map, maps, props.fish)
           }
-        ></GoogleMapReact>
+        >
+          {props.fish.map((fish) => (
+            <Marker
+              key={fish.id}
+              text={fish.name}
+              lat={fish.lat}
+              lng={fish.lon}
+            />
+          ))}
+        </GoogleMapReact>
       ) : null}
     </div>
   );
