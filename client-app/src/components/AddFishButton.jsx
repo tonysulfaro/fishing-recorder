@@ -31,7 +31,7 @@ function MyVerticallyCenteredModal(props) {
     console.log(accessToken);
 
     var payload = {
-      token: accessToken, //hardcoded for now
+      token: accessToken,
       FishType: fishType,
       lat: document.getElementById("lat").value,
       lon: document.getElementById("lon").value,

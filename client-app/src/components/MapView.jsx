@@ -4,19 +4,6 @@ import GoogleMapReact from "google-map-react";
 import Marker from "../components/Marker";
 
 const MapView = (props) => {
-  const getInfoWindowString = (place) => `
-    <div>
-      <div style="font-size: 16px;">
-        ${place.fishType}
-      </div>
-      <div style="font-size: 12px;">
-        ${place.date}
-      </div>
-      <div style="font-size: 12px;">
-        Length:${place.lengthInches}"
-      </div>
-    </div>`;
-
   // Return map bounds based on list of places
   const getMapBounds = (map, maps, places) => {
     const bounds = new maps.LatLngBounds();
@@ -43,33 +30,6 @@ const MapView = (props) => {
     map.fitBounds(bounds);
     // Bind the resize listener
     bindResizeListener(map, maps, bounds);
-
-    // const markers = [];
-    // const infowindows = [];
-
-    // places.forEach((place) => {
-    //   markers.push(
-    //     new maps.Marker({
-    //       position: {
-    //         lat: place.lat,
-    //         lng: place.lon,
-    //       },
-    //       map,
-    //     })
-    //   );
-
-    //   infowindows.push(
-    //     new maps.InfoWindow({
-    //       content: getInfoWindowString(place),
-    //     })
-    //   );
-    // });
-
-    // markers.forEach((marker, i) => {
-    //   marker.addListener("click", () => {
-    //     infowindows[i].open(map, marker);
-    //   });
-    // });
   };
 
   useEffect(() => {

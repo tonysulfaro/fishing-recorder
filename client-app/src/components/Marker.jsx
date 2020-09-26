@@ -20,9 +20,7 @@ const Wrapper = styled.div`
 `;
 
 const Marker = ({ text, onClick }) => (
-  <Wrapper alt={text} onClick={onClick}>
-    {text}
-  </Wrapper>
+  <Wrapper alt={text} onClick={onClick}></Wrapper>
 );
 
 Marker.defaultProps = {

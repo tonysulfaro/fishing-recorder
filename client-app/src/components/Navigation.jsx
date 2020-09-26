@@ -8,6 +8,21 @@ import AddFishButton from "./AddFishButton";
 const Navigation = (props) => {
   const { getAccessTokenSilently } = useAuth0();
 
+  async function getAllFish() {
+    const domain = "rallyokr.us.auth0.com";
+    const accessToken = await getAccessTokenSilently({
+      audience: `https://${domain}/api/v2/`,
+      scope: "read:current_user",
+    });
+
+    fetch(`https://fishing-recorder-api.herokuapp.com/api/fishrecord`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        props.setfish(data);
+      });
+  }
+
   async function getMyFish() {
     const domain = "rallyokr.us.auth0.com";
     const accessToken = await getAccessTokenSilently({
@@ -37,7 +52,9 @@ const Navigation = (props) => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#features">All Fish</Nav.Link>
+          <Nav.Link href="#features" onClick={getAllFish}>
+            All Fish
+          </Nav.Link>
           <Nav.Link href="#myfish" onClick={getMyFish}>
             My Fish
           </Nav.Link>
