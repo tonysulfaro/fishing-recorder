@@ -8,8 +8,8 @@ const Wrapper = styled.div`
   left: 50%;
   width: 18px;
   height: 18px;
-  background-color: #000;
-  border: 2px solid #fff;
+  background-color: #ff0000;
+  border: 2px solid #000;
   border-radius: 100%;
   user-select: none;
   transform: translate(-50%, -50%);
@@ -19,7 +19,11 @@ const Wrapper = styled.div`
   }
 `;
 
-const Marker = ({ text, onClick }) => <Wrapper alt={text} onClick={onClick} />;
+const Marker = ({ text, onClick }) => (
+  <Wrapper alt={text} onClick={onClick}>
+    {text}
+  </Wrapper>
+);
 
 Marker.defaultProps = {
   onClick: null,
