@@ -1,11 +1,29 @@
 import React from "react";
 import "./Navigation.css";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Navbar, Nav } from "react-bootstrap";
 import LogoutButton from "./LogoutButton";
 import AddFishButton from "./AddFishButton";
 
 const Navigation = (props) => {
-  async function getMyFish() {}
+  const { getAccessTokenSilently } = useAuth0();
+
+  async function getMyFish() {
+    const domain = "rallyokr.us.auth0.com";
+    const accessToken = await getAccessTokenSilently({
+      audience: `https://${domain}/api/v2/`,
+      scope: "read:current_user",
+    });
+
+    fetch(
+      `https://fishing-recorder-api.herokuapp.com/api/fishrecord/myfish?token=${accessToken}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        props.setfish(data);
+      });
+  }
 
   return (
     <Navbar
@@ -20,7 +38,9 @@ const Navigation = (props) => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="#features">All Fish</Nav.Link>
-          <Nav.Link onClick={getMyFish}>My Fish</Nav.Link>
+          <Nav.Link href="#myfish" onClick={getMyFish}>
+            My Fish
+          </Nav.Link>
         </Nav>
         <Nav>
           <AddFishButton></AddFishButton>

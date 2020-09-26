@@ -46,7 +46,7 @@ const MapView = (props) => {
   };
 
   useEffect(() => {
-    function getFish() {
+    async function getFish() {
       fetch("https://fishing-recorder-api.herokuapp.com/api/fishrecord")
         .then((response) => response.json())
         .then((data) => {
