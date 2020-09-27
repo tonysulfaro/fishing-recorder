@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navigation.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Navbar, Nav } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 import AddFishButton from "./AddFishButton";
 
 const Navigation = (props) => {
+  const history = useHistory();
   const { getAccessTokenSilently } = useAuth0();
+  const [startDate, setStartDate] = useState(new Date());
 
   async function getAllFish() {
     const domain = "rallyokr.us.auth0.com";
@@ -40,6 +43,10 @@ const Navigation = (props) => {
       });
   }
 
+  function goToReport() {
+    history.push("/report");
+  }
+
   return (
     <Navbar
       className="nav"
@@ -58,6 +65,7 @@ const Navigation = (props) => {
           <Nav.Link href="#myfish" onClick={getMyFish}>
             My Fish
           </Nav.Link>
+          <Nav.Link onClick={goToReport}>Report</Nav.Link>
         </Nav>
         <Nav>
           <AddFishButton></AddFishButton>

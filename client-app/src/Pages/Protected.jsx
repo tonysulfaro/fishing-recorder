@@ -9,7 +9,7 @@ const Protected = () => {
   return (
     <div className="App">
       <div>
-        <Navigation setfish={setfish}></Navigation>
+        <Navigation fish={fish} setfish={setfish}></Navigation>
         <MapView fish={fish} setfish={setfish}></MapView>
       </div>
     </div>

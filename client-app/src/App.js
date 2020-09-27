@@ -12,6 +12,7 @@ import LoginPage from "./Pages/LoginPage";
 import NotFound from "./Pages/NotFound";
 
 import { useAuth0 } from "@auth0/auth0-react";
+import Report from "./Pages/Report";
 
 function PrivateRoute({ children, ...rest }) {
   const { isAuthenticated } = useAuth0();
@@ -41,6 +42,9 @@ function App() {
       <Switch>
         <PrivateRoute exact path="/protected">
           <Protected></Protected>
+        </PrivateRoute>
+        <PrivateRoute exact path="/report">
+          <Report></Report>
         </PrivateRoute>
         <Route exact path="/">
           <LoginPage></LoginPage>
