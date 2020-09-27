@@ -82,9 +82,9 @@ const MapView = (props) => {
           ))}
         </GoogleMapReact>
       ) : (
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
+        <div className="no-record-container">
+          <h1>No Fish Records Found For This User</h1>
+        </div>
       )}
     </div>
   );
