@@ -58,6 +58,11 @@ namespace FishingRecorder.API.Repositories
 
             var user = await GetUserFromToken(token);
 
+            if (user == null)
+            {
+                user = await SaveNewUserFromToken(token);
+            }
+
             return await context.FishRecord
                 .Where(u => u.UserId == user.UserId)
                 .Select(r => new FishRecordResponse(r))
