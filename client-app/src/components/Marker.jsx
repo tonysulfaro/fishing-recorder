@@ -19,17 +19,36 @@ const Wrapper = styled.div`
   }
 `;
 
-const Marker = ({ text, onClick }) => (
-  <Wrapper alt={text} onClick={onClick}></Wrapper>
+const Popup = styled.span`
+  visibility: show;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+`;
+
+const Marker = ({ fishType, lengthInches, date, onClick }) => (
+  <Wrapper alt={fishType} onClick={onClick}>
+    <Popup>
+      <p>{fishType}</p>
+      <p>{lengthInches}"</p>
+      <p>{new Date(date).toString()}</p>
+    </Popup>
+  </Wrapper>
 );
 
 Marker.defaultProps = {
-  onClick: null,
-};
-
-Marker.propTypes = {
-  onClick: PropTypes.func,
-  text: PropTypes.string.isRequired,
+  onClick: function () {
+    var popup = this;
+    console.log(popup);
+  },
 };
 
 export default Marker;
