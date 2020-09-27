@@ -3,7 +3,7 @@ import "./MapView.css";
 import GoogleMapReact from "google-map-react";
 import Spinner from "react-bootstrap/Spinner";
 import Marker from "../components/Marker";
-import CurrentLocationMarker from "../components/CurrentLocationMarker"
+import CurrentLocationMarker from "../components/CurrentLocationMarker";
 
 const MapView = (props) => {
   const [currentLat, setCurrentLat] = useState(null);
@@ -84,6 +84,9 @@ const MapView = (props) => {
             setmap(map);
             setmaps(maps);
           }}
+          options={function (maps) {
+            return { mapTypeId: "hybrid" };
+          }}
         >
           {props.fish.map((fish) => (
             <Marker
@@ -96,7 +99,10 @@ const MapView = (props) => {
               lng={fish.lon}
             />
           ))}
-          <CurrentLocationMarker lat={currentLat} lng={currentLon}></CurrentLocationMarker>
+          <CurrentLocationMarker
+            lat={currentLat}
+            lng={currentLon}
+          ></CurrentLocationMarker>
         </GoogleMapReact>
       ) : (
         <div className="no-record-container">
