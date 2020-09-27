@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 import {
@@ -37,14 +37,16 @@ function PrivateRoute({ children, ...rest }) {
 }
 
 function App() {
+  const [fish, setfish] = useState([]);
+
   return (
     <Router>
       <Switch>
         <PrivateRoute exact path="/protected">
-          <Protected></Protected>
+          <Protected fish={fish} setfish={setfish}></Protected>
         </PrivateRoute>
         <PrivateRoute exact path="/report">
-          <Report></Report>
+          <Report fish={fish}></Report>
         </PrivateRoute>
         <Route exact path="/">
           <LoginPage></LoginPage>

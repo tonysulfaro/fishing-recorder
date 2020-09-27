@@ -3,9 +3,7 @@ import "./Protected.css";
 import MapView from "../components/MapView";
 import Navigation from "../components/Navigation";
 
-const Protected = () => {
-  const [fish, setfish] = useState([]);
-
+const Protected = ({ fish, setfish }) => {
   return (
     <div className="App">
       <div>

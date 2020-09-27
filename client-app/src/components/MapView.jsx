@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MapView.css";
 import GoogleMapReact from "google-map-react";
+import Spinner from "react-bootstrap/Spinner";
 import Marker from "../components/Marker";
 
 const MapView = (props) => {
@@ -80,7 +81,11 @@ const MapView = (props) => {
             />
           ))}
         </GoogleMapReact>
-      ) : null}
+      ) : (
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      )}
     </div>
   );
 };

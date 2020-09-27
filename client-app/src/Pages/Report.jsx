@@ -1,7 +1,7 @@
 import React from "react";
 import "./Report.css";
 import { useHistory } from "react-router-dom";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Table } from "react-bootstrap";
 import LogoutButton from "../components/LogoutButton";
 
 const Report = (props) => {
@@ -33,7 +33,30 @@ const Report = (props) => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <h1>Fishing Report</h1>
+      <div className="report-container">
+        <h1>Fishing Report</h1>
+        <h2>Records</h2>
+        <Table striped hover responsive>
+          <thead>
+            <tr>
+              <th>Fish Record ID</th>
+              <th>Fish Type</th>
+              <th>Length (inches)</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {props.fish.map((fish) => (
+              <tr>
+                <td>{fish.fishRecordId}</td>
+                <td>{fish.fishType}</td>
+                <td>{fish.lengthInches}</td>
+                <td>{fish.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </div>
   );
 };
