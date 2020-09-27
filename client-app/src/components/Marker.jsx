@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -26,7 +25,7 @@ const Popup = styled.span`
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 8px 0;
+  padding: 8px;
   position: absolute;
   z-index: 1;
   bottom: 125%;
@@ -34,21 +33,25 @@ const Popup = styled.span`
   margin-left: -80px;
 `;
 
-const Marker = ({ fishType, lengthInches, date, onClick }) => (
-  <Wrapper alt={fishType} onClick={onClick}>
-    <Popup>
-      <p>{fishType}</p>
-      <p>{lengthInches}"</p>
-      <p>{new Date(date).toString()}</p>
-    </Popup>
-  </Wrapper>
-);
+const Marker = ({ fishRecordId, fishType, lengthInches, date, onClick }) => {
+  const [show, setshow] = useState(false);
 
-Marker.defaultProps = {
-  onClick: function () {
-    var popup = this;
-    console.log(popup);
-  },
+  function showMarker() {
+    setshow(!show);
+  }
+
+  return (
+    <Wrapper alt={fishType} onClick={showMarker}>
+      <Popup
+        id={fishRecordId}
+        style={{ visibility: show ? "visible" : "hidden" }}
+      >
+        <p>{fishType}</p>
+        <p>{lengthInches}"</p>
+        <p>{new Date(date).toString()}</p>
+      </Popup>
+    </Wrapper>
+  );
 };
 
 export default Marker;

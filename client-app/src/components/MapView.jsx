@@ -71,6 +71,7 @@ const MapView = (props) => {
           {props.fish.map((fish) => (
             <Marker
               key={fish.fishRecordId}
+              fishRecordId={fish.fishRecordId}
               fishType={fish.fishType}
               lengthInches={fish.lengthInches}
               date={fish.date}
