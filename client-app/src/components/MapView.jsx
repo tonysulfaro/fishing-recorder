@@ -51,12 +51,7 @@ const MapView = (props) => {
         });
     }
     getFish();
-  }, []);
 
-  useEffect(() => {
-    if (map !== null && maps !== null) {
-      handleApiLoaded(map, maps, props.fish);
-    }
     function getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -70,6 +65,12 @@ const MapView = (props) => {
       setCurrentLon(position.coords.longitude);
     }
     getLocation();
+  }, []);
+
+  useEffect(() => {
+    if (map !== null && maps !== null) {
+      handleApiLoaded(map, maps, props.fish);
+    }
   }, [map, maps, props.fish, handleApiLoaded]);
 
   return (
