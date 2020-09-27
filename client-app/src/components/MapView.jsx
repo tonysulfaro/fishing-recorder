@@ -3,8 +3,11 @@ import "./MapView.css";
 import GoogleMapReact from "google-map-react";
 import Spinner from "react-bootstrap/Spinner";
 import Marker from "../components/Marker";
+import CurrentLocationMarker from "../components/CurrentLocationMarker"
 
 const MapView = (props) => {
+  const [currentLat, setCurrentLat] = useState(null);
+  const [currentLon, setCurrentLon] = useState(null);
   const [map, setmap] = useState(null);
   const [maps, setmaps] = useState(null);
 
@@ -14,6 +17,7 @@ const MapView = (props) => {
 
     places.forEach((place) => {
       bounds.extend(new maps.LatLng(place.lat, place.lon));
+      bounds.extend(new maps.LatLng(currentLat, currentLon));
     });
     return bounds;
   };
@@ -51,6 +55,19 @@ const MapView = (props) => {
     if (map !== null && maps !== null) {
       handleApiLoaded(map, maps, props.fish);
     }
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showPosition(position) {
+      setCurrentLat(position.coords.latitude);
+      setCurrentLon(position.coords.longitude);
+    }
+    getLocation();
   }, [map, maps, props.fish, handleApiLoaded]);
 
   return (
@@ -80,10 +97,11 @@ const MapView = (props) => {
               lng={fish.lon}
             />
           ))}
+          <CurrentLocationMarker lat={currentLat} lng={currentLon}></CurrentLocationMarker>
         </GoogleMapReact>
       ) : (
         <div className="no-record-container">
-          <h1>No Fish Records Found For This User</h1>
+          <h1>Loading...</h1>
         </div>
       )}
     </div>
