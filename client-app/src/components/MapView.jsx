@@ -18,7 +18,9 @@ const MapView = (props) => {
     places.forEach((place) => {
       bounds.extend(new maps.LatLng(place.lat, place.lon));
     });
-    bounds.extend(new maps.LatLng(currentLat, currentLon));
+    if (currentLat) {
+      bounds.extend(new maps.LatLng(currentLat, currentLon));
+    }
     return bounds;
   };
 
