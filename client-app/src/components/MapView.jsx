@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./MapView.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useHistory } from "react-router-dom";
 import GoogleMapReact from "google-map-react";
 import Spinner from "react-bootstrap/Spinner";
 import Marker from "../components/Marker";
 import CurrentLocationMarker from "../components/CurrentLocationMarker";
 
 const MapView = (props) => {
+  const {
+    isAuthenticated,
+    isLoading
+  } = useAuth0();
+  const history = useHistory();
   const [currentLat, setCurrentLat] = useState(null);
   const [currentLon, setCurrentLon] = useState(null);
   const [map, setmap] = useState(null);
@@ -73,6 +80,19 @@ const MapView = (props) => {
     }
   }, [map, maps, props.fish, handleApiLoaded]);
 
+  if(isLoading){
+    return (
+      <div className="no-record-container">
+          <h1>Loading...</h1>
+        </div>
+    )
+  }
+
+  if(!isAuthenticated){
+    history.push("/");
+    return null;
+  }
+
   return (
     <div className="map-container">
       {props.fish.length > 0 ? (
@@ -110,7 +130,7 @@ const MapView = (props) => {
         </GoogleMapReact>
       ) : (
         <div className="no-record-container">
-          <h1>Loading...</h1>
+          <h1>No Records Found</h1>
         </div>
       )}
     </div>
