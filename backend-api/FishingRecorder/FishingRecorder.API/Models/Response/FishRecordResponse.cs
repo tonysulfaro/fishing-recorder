@@ -17,6 +17,7 @@ namespace FishingRecorder.API.Models.Response
             Lon = r.Lon;
             Date = r.Date;
             LengthInches = r.LengthInches;
+            WaterTemp = r.WaterTemp;
         }
         public int FishRecordId { get; set; }
         public int UserId { get; set; }
@@ -25,5 +26,6 @@ namespace FishingRecorder.API.Models.Response
         public double Lon { get; set; }
         public DateTime? Date { get; set; }
         public int? LengthInches { get; set; }
+        public int? WaterTemp { get; set; }
     }
 }

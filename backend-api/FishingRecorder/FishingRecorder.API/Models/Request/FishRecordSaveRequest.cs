@@ -18,5 +18,7 @@ namespace FishingRecorder.API.Models.Request
         public double Lon { get; set; }
         [Required]
         public int? LengthInches { get; set; }
+        [Required]
+        public int? WaterTemp { get; set; }
     }
 }

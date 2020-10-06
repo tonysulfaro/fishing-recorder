@@ -43,6 +43,7 @@ namespace FishingRecorder.API.Repositories
                 Lat = request.Lat,
                 Lon = request.Lon,
                 LengthInches = request.LengthInches,
+                WaterTemp = request.WaterTemp,
                 Date = DateTime.UtcNow
             };
 
