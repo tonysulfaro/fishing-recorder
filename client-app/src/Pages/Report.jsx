@@ -42,6 +42,7 @@ const Report = (props) => {
               <th>Fish Record ID</th>
               <th>Fish Type</th>
               <th>Length (inches)</th>
+              <th>Water Temp (F)</th>
               <th>Date</th>
             </tr>
           </thead>
@@ -51,6 +52,7 @@ const Report = (props) => {
                 <td>{fish.fishRecordId}</td>
                 <td>{fish.fishType}</td>
                 <td>{fish.lengthInches}</td>
+                <td>{fish.waterTemp}</td>
                 <td>{fish.date}</td>
               </tr>
             ))}

@@ -33,12 +33,21 @@ const Popup = styled.span`
   margin-left: -80px;
 `;
 
-const Marker = ({ fishRecordId, fishType, lengthInches, date, onClick }) => {
+const Marker = ({
+  fishRecordId,
+  fishType,
+  lengthInches,
+  date,
+  waterTemp,
+  onClick,
+}) => {
   const [show, setshow] = useState(false);
 
   function showMarker() {
     setshow(!show);
   }
+
+  console.log(waterTemp);
 
   return (
     <Wrapper alt={fishType} onClick={showMarker}>
@@ -48,6 +57,7 @@ const Marker = ({ fishRecordId, fishType, lengthInches, date, onClick }) => {
       >
         <p>{fishType}</p>
         <p>{lengthInches}"</p>
+        <p>{waterTemp}°F</p>
         <p>{new Date(date).toString()}</p>
       </Popup>
     </Wrapper>

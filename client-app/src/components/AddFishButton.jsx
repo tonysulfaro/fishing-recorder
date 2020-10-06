@@ -19,6 +19,7 @@ function showPosition(position) {
 function MyVerticallyCenteredModal(props) {
   const [fishType, setfishType] = useState("walleye");
   const [lengthInches, setlengthInches] = useState();
+  const [waterTemp, setwaterTemp] = useState(0);
   const { getAccessTokenSilently } = useAuth0();
 
   async function handleSubmit() {
@@ -36,6 +37,7 @@ function MyVerticallyCenteredModal(props) {
       lat: document.getElementById("lat").value,
       lon: document.getElementById("lon").value,
       lengthInches: lengthInches,
+      waterTemp: waterTemp,
     };
 
     console.log(payload);
@@ -99,6 +101,17 @@ function MyVerticallyCenteredModal(props) {
               placeholder="Fish Length"
               onChange={(e) => {
                 setlengthInches(e.target.value);
+              }}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="exampleForm.ControlInput1">
+            <Form.Label>Water Temperature (F)</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Water Temperature"
+              onChange={(e) => {
+                setwaterTemp(e.target.value);
               }}
             />
           </Form.Group>

@@ -8,10 +8,7 @@ import Marker from "../components/Marker";
 import CurrentLocationMarker from "../components/CurrentLocationMarker";
 
 const MapView = (props) => {
-  const {
-    isAuthenticated,
-    isLoading
-  } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
   const history = useHistory();
   const [currentLat, setCurrentLat] = useState(null);
   const [currentLon, setCurrentLon] = useState(null);
@@ -80,15 +77,15 @@ const MapView = (props) => {
     }
   }, [map, maps, props.fish, handleApiLoaded]);
 
-  if(isLoading){
+  if (isLoading) {
     return (
       <div className="no-record-container">
-          <h1>Loading...</h1>
-        </div>
-    )
+        <h1>Loading...</h1>
+      </div>
+    );
   }
 
-  if(!isAuthenticated){
+  if (!isAuthenticated) {
     history.push("/");
     return null;
   }
@@ -118,6 +115,7 @@ const MapView = (props) => {
               fishRecordId={fish.fishRecordId}
               fishType={fish.fishType}
               lengthInches={fish.lengthInches}
+              waterTemp={fish.waterTemp}
               date={fish.date}
               lat={fish.lat}
               lng={fish.lon}
