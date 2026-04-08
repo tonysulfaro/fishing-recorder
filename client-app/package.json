@@ -18,14 +18,18 @@
     "react-scripts": "3.4.3",
     "styled-components": "^5.2.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "CI= react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "prettier": "^2.8.0",
+    "eslint-config-prettier": "^8.5.0"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "scripts": {
+    "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "CI= NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "test": "NODE_OPTIONS=--openssl-legacy-provider react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src/ --ext .js,.jsx",
+    "format": "prettier --check \"src/**/*.{js,jsx,css}\"",
+    "format:fix": "prettier --write \"src/**/*.{js,jsx,css}\""
   },
   "browserslist": {
     "production": [
