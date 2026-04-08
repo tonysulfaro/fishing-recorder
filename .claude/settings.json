@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(yarn install:*)",
+      "Bash(yarn lint:*)",
+      "Bash(yarn build:*)",
+      "Bash(yarn test:*)",
+      "Bash(yarn format:*)",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test:*)",
+      "Bash(cd *)",
+      "Bash(ls *)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(cat *)",
+      "Bash(mkdir *)",
+      "Bash(npx eslint:*)"
+    ]
+  }
+}
