@@ -21,7 +21,7 @@ Web application for recording and visualizing fishing catches on an interactive 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 14+ and Yarn
+- Node.js 18+ and Yarn
 - .NET Core 3.1 SDK
 - PostgreSQL database
 
@@ -78,6 +78,7 @@ This project is undergoing a phased modernization. See [docs/MODERNIZATION_PLAN.
 - Phase 0: Extract hardcoded config, add tests, create API service layer
 - Phase 1: Initialize Next.js 15 + shadcn/ui alongside existing CRA app
 - Phase 2: Migrate components one-by-one to Next.js + shadcn/ui + TypeScript
+- Phase 3: shadcn/ui component mapping reference
 - Phase 4: Backend upgrade to .NET 8+
 - Phase 5: Cleanup and cutover
 
